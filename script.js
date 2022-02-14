@@ -63,9 +63,9 @@ function playRound(playerSelection) {
     }
 }
 
+const resultText = document.querySelector('.result');
 function result(innerText) {
-    const result = document.querySelector('#result');
-    result.innerText = innerText;
+    resultText.innerText = innerText;
     console.log(`"${innerText}" was printed.`)
 }
 
@@ -75,22 +75,33 @@ function game(numberOfRounds) {
     }
 }
 
+function statusText(innerText) {
+    const statusText = document.querySelector('#status');
+    statusText.innerText = innerText;
+}
+
 
 const score = document.querySelector('#score');
 function updateScore() {
 
+    statusText('Make your move...')
     if (playerScore >= 5) {
         score.innerText = `${playerScore} - ${computerScore}`;
         result('You won 5 times, you\'re the winner!');
+        resultText.classList.add('rainbow');
         resetScore();
+        statusText('Make a move to try again!');
+        
     }
     else if (computerScore >= 5){
         score.innerText = `${playerScore} - ${computerScore}`;
         result('You\'ve lost 5 times. The computer wins!');
         resetScore();
+        statusText('Make a move to try again!');
     }
     else {
         score.innerText = `${playerScore} - ${computerScore}`;
+        resultText.classList.remove('rainbow');
     }
 }
 
